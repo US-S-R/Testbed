@@ -6,11 +6,11 @@ Log
 Date              Programmer           Changes made 
 _______          _____________        ________________________________________
                  
-2020-02-19        u/S-S-R              Geometric, Arithmetic, & Harmonic means 
+2020-02-19          u/S-S-R            Geometric, Arithmetic, & Harmonic means 
 
 2020-02-20             ^               Alphamax, Finite Geometric Sum, Stirling factorial approximation
 
-2020-02-23             ^               Poisson Distribution (poor accuracy),Coulomb scalar& vector 
+2020-02-23             ^               Poisson Distribution (poor accuracy),Coulomb scalar y vector 
 
 2020-03-02             ^               Radian conversion, 
 
@@ -18,13 +18,16 @@ _______          _____________        ________________________________________
 
 2020-03-19             ^               Slight Debugging, tested as library
 
+2020-03-24             ^               Floor function
+
 */
 
 # include <iostream>
 # include <math.h>
-using namespace std; 
+
 
 typedef long double float_128; 
+typedef unsigned long long int int_128;
 
 
 double addition(int numero){
@@ -52,18 +55,32 @@ double arithmetic_mean(double x){
     return addition(x)/x;
     }
 
- double geometric_mean(double x){
-  return  pow(multiplication(x),1/x);
+double geometric_mean(double x){
+    return  pow(multiplication(x),1/x);
     }
 
 float harmonic_mean(float a, float b, float c) {
 return 3/(1/a + 1/b +1/c);
 }
+
 /*
 float root_square_mean (float a,float b, float c){
  return sqrt(arithmetic_mean(a*a,b*b,c*c))
 } 
-*/
+*/  
+
+unsigned long long int int_floor_function(int_128 input, int_128 floor){
+ if (input >  floor){
+ input/=floor;
+ }
+ else{
+ input==0;
+ }
+ return input;
+ }
+ 
+
+
 float degrees_to_radians(float a)  {
 return a*.01745;
 }
@@ -81,7 +98,7 @@ return .5*a*(b*b);
 }
 
 float alpha_max(float a, float b) {
-return max(a,b)*.9604 + min(a,b)*.3987;
+return std::max(a,b)*.9604 + std::min(a,b)*.3987;
 }
 
 float finite_geometric_sum(float initial_value , float common_ratio, int exponent){
@@ -107,4 +124,3 @@ return probability/stirling_factorial(b);
 double coulomb_scalar(double a, double b, float c ){ 
 return 8987551787*((a*b)/(c*c));
 }
-
