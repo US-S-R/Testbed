@@ -1,0 +1,156 @@
+/* Conversion Library 
+All imperial units are converted to metric
+
+To use library put  #include "Conversion_Library" in the heading  
+
+declare variable as member of Convert_unit class.
+ Example 
+
+Convert_unit length;
+std::cin>> length;
+std::cout<< length.in_cm() <<std::endl;
+
+Outputs the conversion. 
+
+
+
+
+*/ 
+#define float_128 long double
+
+struct Convert_unit {
+
+   float_128  a;
+                                //Distance to metric
+   float_128  in_cm(){
+              return a*2.54;
+              }
+   float_128  ft_m (){
+              return a*.3048;
+              }
+                       
+   float_128  yd_m (){
+              return a*.9144;
+              }
+              
+   float_128  mi_km(){
+              return a* 1.609344;
+              }
+                                   //nautical miles  
+   float_128  nm_km(){
+              return a* 1.852;
+              }
+                                   // Square area units              
+   float_128  in2_cm2(){
+              return a*6.4516;
+              }
+                             
+   float_128  ft2_m2(){
+              return a*.09290304;
+              }
+              
+   float_128  yd2_m2(){
+              return a*.83612736;
+              }
+               
+   float_128  mi2_km2(){
+              return a*2.589988110336;
+              }
+                                                                        
+   float_128  acre_km2(){
+              return a*.004047;
+              }
+                                      //Cubic volume units
+   float_128  in3_cm3(){
+              return a*16.3871
+              } 
+    
+   float_128  ft3_m3 (){
+              return a*.028316846592;
+              }
+              
+   float_128  yd3_m3 (){
+              return a*.764554857984;
+              }                                
+
+                                        //oz to milliter
+   float_128  oz_mil(){
+              return a*29.5735;
+              }
+                                         //Gallon to liter
+   float_128  gal_l (){
+              return a*3.78541;
+              }
+              
+   float_128  oz_g  (){
+              return a*28.349523125; 
+              }                    
+                                         // Avoirdupois pound (aka standard pound) to kg
+   float_128  lb_kg (){
+              return a*.45359237;
+              }
+                                          //US Short ton to metric ton              
+  float_128   tn_mt (){
+              return a*.907185;
+              }
+                                          //Fahrenheit to Kelvin 
+  float_128   f_klv(){
+              return (a-32)*.55555+273.15;
+              }
+                                         //Foot-pound/sec to joule
+  float_128   fts_jl(){
+              return a*1.35518; 
+              }
+                                        //BTU to kilocalorie
+   float_128  btu_kc(){
+              return a*.252164;
+              }
+                                       //BTU to joules (ISO standard)
+   float_128  btu_jl(){
+              return a*1055.06;
+              }
+                                       //Curie to Becquerel
+   float_128  cu_bql (){
+              return a*3.7E+10;
+              }   
+                                      //Dyne to newton
+   float_128  dyn_nw(){
+              return a*1E+5;
+              }                   
+                                      //erg to joule
+   float_128  erg_jl(){
+              return a*1E+7; 
+              }           
+                                     //horsepower to watt
+   float_128  hp_wt (){
+             return a*735.499;
+             }    
+                                     //Astronomical unit to km
+   float_128  au_km (){
+              return a*149597870.7;
+              }                
+                                     //lightyear to km
+   float_128  ly_km (){
+              return a*9460730472580.800;
+              }
+                                     //parsec to km
+   float_128  pc_km (){
+              return a*30856775814913.673;
+              }          
+                                     //Solar radius to km
+   float_128  sor_km (){
+              return a*695700;
+              }
+                                     //Solar mass to kilograms
+   float_128  som_kg (){
+              return a*1.98847E+30; 
+              }
+                                     //Earth mass to kg
+   float_128  ert_kg (){
+              return a*5.974E+24
+              }           
+                                  
+};
+
+
+
