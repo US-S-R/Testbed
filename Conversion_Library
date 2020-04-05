@@ -1,26 +1,10 @@
-/* Conversion Library 
-All imperial units are converted to metric
-
-To use library put  #include "Conversion_Library" in the heading  
-
-declare variable as member of Convert_unit class.
- Example 
-
-Convert_unit length;
-std::cin>> length;
-std::cout<< length.in_cm() <<std::endl;
-
-Outputs the conversion. 
-
-
-
-
-*/ 
 #define float_128 long double
 
 struct Convert_unit {
 
+
    float_128  a;
+   
                                 //Distance to metric
    float_128  in_cm(){
               return a*2.54;
@@ -62,7 +46,7 @@ struct Convert_unit {
               }
                                       //Cubic volume units
    float_128  in3_cm3(){
-              return a*16.3871
+              return a*16.3871;
               } 
     
    float_128  ft3_m3 (){
@@ -131,7 +115,7 @@ struct Convert_unit {
               }                
                                      //lightyear to km
    float_128  ly_km (){
-              return a*9460730472580.800;
+              return a*9460730472580.8;
               }
                                      //parsec to km
    float_128  pc_km (){
@@ -147,10 +131,43 @@ struct Convert_unit {
               }
                                      //Earth mass to kg
    float_128  ert_kg (){
-              return a*5.974E+24
+              return a*5.974E+24;
               }           
                                   
 };
+
+struct Convert_physics {
+
+   float_128  a;
+                                    //Frequency to wavelength
+   float_128  hz_wl(){
+              return a*3.33564095198152E-9; 
+              } 
+              
+   float_128  wl_hz(){             //Wavelength to frequency
+              return a*299792458;
+              }            
+
+
+
+};
+
+struct  Convert_math {
+
+   float_128  a,b;
+                                   //Degrees to radians         
+   float_128  dg_rad(){
+              return a*1.74532925199432957692369E-2
+              }
+                                  //Radians to degrees
+   float_128  rad_dg(){
+              return a* 57.295779513096787
+              }          
+
+
+
+};
+
 
 
 
