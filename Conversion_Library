@@ -1,150 +1,255 @@
-#define float_128 long double
+#include<cmath>
+//#define float_128 long double
 
 struct Convert_unit {
 
 
-   float_128  a;
+   float      a;
    
                                 //Distance to metric
-   float_128  in_cm(){
+   float      in_cm(){
               return a*2.54;
               }
-   float_128  ft_m (){
+   float      ft_m (){
               return a*.3048;
               }
                        
-   float_128  yd_m (){
+   float      yd_m (){
               return a*.9144;
               }
               
-   float_128  mi_km(){
+   float      mi_km(){
               return a* 1.609344;
               }
                                    //nautical miles  
-   float_128  nm_km(){
+   float      nm_km(){
               return a* 1.852;
               }
                                    // Square area units              
-   float_128  in2_cm2(){
+   float      in2_cm2(){
               return a*6.4516;
               }
                              
-   float_128  ft2_m2(){
-              return a*.09290304;
+   float      ft2_m2(){
+              return a*.092903;
               }
               
-   float_128  yd2_m2(){
-              return a*.83612736;
+   float      yd2_m2(){
+              return a*.8361273;
               }
                
-   float_128  mi2_km2(){
-              return a*2.589988110336;
+   float      mi2_km2(){
+              return a*2.5899881;
               }
                                                                         
-   float_128  acre_km2(){
+   float      acre_km2(){
               return a*.004047;
               }
                                       //Cubic volume units
-   float_128  in3_cm3(){
+   float      in3_cm3(){
               return a*16.3871;
               } 
     
-   float_128  ft3_m3 (){
-              return a*.028316846592;
+   float      ft3_m3 (){
+              return a*.0283168;
               }
               
-   float_128  yd3_m3 (){
-              return a*.764554857984;
+   float      yd3_m3 (){
+              return a*.7645548;
               }                                
 
                                         //oz to milliter
-   float_128  oz_mil(){
+   float      oz_mil(){
               return a*29.5735;
               }
                                          //Gallon to liter
-   float_128  gal_l (){
+   float      gal_l (){
               return a*3.78541;
               }
               
-   float_128  oz_g  (){
-              return a*28.349523125; 
+   float      oz_g  (){
+              return a*28.3495231; 
               }                    
                                          // Avoirdupois pound (aka standard pound) to kg
-   float_128  lb_kg (){
-              return a*.45359237;
+   float      lb_kg (){
+              return a*.4535924;
               }
                                           //US Short ton to metric ton              
-  float_128   tn_mt (){
+   float      tn_mt (){
               return a*.907185;
               }
+/*
+          Energy conversions
+*/              
+              
+              
                                           //Fahrenheit to Kelvin 
-  float_128   f_klv(){
+   float      f_klv(){
               return (a-32)*.55555+273.15;
               }
                                          //Foot-pound/sec to joule
-  float_128   fts_jl(){
+   float      fts_jl(){
               return a*1.35518; 
               }
                                         //BTU to kilocalorie
-   float_128  btu_kc(){
+   float      btu_kc(){
               return a*.252164;
               }
                                        //BTU to joules (ISO standard)
-   float_128  btu_jl(){
+   float      btu_jl(){
               return a*1055.06;
               }
                                        //Curie to Becquerel
-   float_128  cu_bql (){
+   float      cu_bql (){
               return a*3.7E+10;
               }   
                                       //Dyne to newton
-   float_128  dyn_nw(){
+   float      dyn_nw(){
               return a*1E+5;
               }                   
                                       //erg to joule
-   float_128  erg_jl(){
+   float      erg_jl(){
               return a*1E+7; 
               }           
                                      //horsepower to watt
-   float_128  hp_wt (){
-             return a*735.499;
-             }    
+   float      hp_wt (){
+              return a*735.499;
+              }  
+                                    //Electron volts to joules
+  float       ev_jl (){
+              return a*1.60218E-19;
+              }
+                                   //Joules to electron volts 
+  float       jl_ev (){
+              return a*6.242E+18;
+              }                          
+/*
+          Astronomical Conversions
+*/                         
+              
                                      //Astronomical unit to km
-   float_128  au_km (){
+   float      au_km (){
               return a*149597870.7;
               }                
                                      //lightyear to km
-   float_128  ly_km (){
+   float      ly_km (){
               return a*9460730472580.8;
               }
                                      //parsec to km
-   float_128  pc_km (){
+   float      pc_km (){
               return a*30856775814913.673;
               }          
                                      //Solar radius to km
-   float_128  sor_km (){
+   float      sor_km(){
               return a*695700;
               }
                                      //Solar mass to kilograms
-   float_128  som_kg (){
+   float      som_kg(){
               return a*1.98847E+30; 
               }
                                      //Earth mass to kg
-   float_128  ert_kg (){
+   float      ert_kg (){
               return a*5.974E+24;
               }           
-                                  
+              
+/*
+            Planck unit conversions
+*/               
+                                    //SI to planck length (Gaussian)
+  float      si_plg (){
+             return a*6.18792353E+34;
+             }
+                                   //SI to planck length (Lorentz-Heaviside)
+  float      si_pll (){
+             return a*1.745505324E+34;
+             }
+                                  //SI to Planck temperature (Gaussian)
+  float      si_ptg (){
+             return a*7.058109415E+31;
+             }           
+                                  //SI to Planck temperature (Lorentz-Heaviside)
+  float      si_ptl (){
+             return a*2.502039162E+30;
+             }                  
+              
+/*
+            Prefix conversion   where n_b and n is the prefix b= base unit
+*/              
+
+  float      yota_b  (){
+             return a*1E+24; 
+             } 
+             
+  float      zeta_b  (){
+             return a*1E+21;
+             }
+             
+  float      exa_b  (){
+             return a*1E+18;
+             }
+       
+  float      peta_b  (){
+             return a*1E+15;
+             } 
+             
+  float      tera_b (){
+             return a*1E+12;
+             }
+ 
+  float      giga_b (){
+             return a*1E+9;
+             }    
+             
+  float      mega_b (){
+             return a*1E+6;
+             }                  
+   
+   float     kilo_b  (){
+             return a*1E+3;
+             }  
+   
+   float     mill_b (){
+             return a*1E-3;
+             }  
+             
+   float     micr_b (){
+             return a*1E-6;
+             }  
+             
+   float     nano_b (){
+             return a*1E-9;
+             }  
+             
+   float     pico_b (){
+             return a*1E-12;
+             }  
+             
+   float     femt_b (){
+             return a*1E-15;
+             }  
+             
+   float     atto_b  (){
+             return a*1E-18;
+             }  
+             
+   float     zept_b (){
+             return a*1E-21;
+             }  
+             
+   float     yoct_b (){
+             return a*1E-24;
+             }                                                                                                                 
 };
 
 struct Convert_physics {
 
-   float_128  a;
+   float      a;
                                     //Frequency to wavelength
-   float_128  hz_wl(){
+   float      hz_wl(){
               return a*3.33564095198152E-9; 
               } 
               
-   float_128  wl_hz(){             //Wavelength to frequency
+   float      wl_hz(){             //Wavelength to frequency
               return a*299792458;
               }            
 
@@ -154,16 +259,25 @@ struct Convert_physics {
 
 struct  Convert_math {
 
-   float_128  a,b;
+   float      a,b,x,y;
                                    //Degrees to radians         
-   float_128  dg_rad(){
-              return a*1.74532925199432957692369E-2
+   float      dg_rad(){
+              return a*1.7453292E-2;
               }
                                   //Radians to degrees
-   float_128  rad_dg(){
-              return a* 57.295779513096787
+   float      rad_dg(){
+              return a* 57.2957795 ;
               }          
-
+                                 //Input Radians only; a=angle b=distance; 
+   void       polar_cart(){
+              x= b*cos(a);
+              y= b*sin(a);
+              } 
+                                // a= x-coord, b= y-coord; x= distance, y= angle radians
+   void       cart_polar(){
+              x=sqrt(a*a+b*b);
+              y=tan(b/a);
+              }           
 
 
 };
