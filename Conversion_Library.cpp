@@ -1,81 +1,82 @@
 #include<cmath>
-//#define float_128 long double
+#define f_32  float
+#define f_64  double
+#define f_128 long double
 
-struct Convert_unit {
+ namespace CAS::Conversion {
 
 
-   float      a;
    
                                 //Distance to metric
-   float      in_cm(){
+   f_64       in_cm(f_64 a){
               return a*2.54;
               }
-   float      ft_m (){
+   f_64       ft_m (f_64 a){
               return a*.3048;
               }
                        
-   float      yd_m (){
+   f_64       yd_m (f_64 a){
               return a*.9144;
               }
               
-   float      mi_km(){
+   f_64       mi_km(f_64 a){
               return a* 1.609344;
               }
                                    //nautical miles  
-   float      nm_km(){
+   f_64       nm_km(f_64 a){
               return a* 1.852;
               }
                                    // Square area units              
-   float      in2_cm2(){
+   f_64       in2_cm2(f_64 a){
               return a*6.4516;
               }
                              
-   float      ft2_m2(){
+   f_64       ft2_m2(f_64 a){
               return a*.092903;
               }
               
-   float      yd2_m2(){
+   f_64       yd2_m2(f_64 a){
               return a*.8361273;
               }
                
-   float      mi2_km2(){
+   f_64       mi2_km2(f_64 a){
               return a*2.5899881;
               }
                                                                         
-   float      acre_km2(){
+   f_64       acre_km2(f_64 a){
               return a*.004047;
               }
                                       //Cubic volume units
-   float      in3_cm3(){
+   f_64       in3_cm3(f_64 a){
               return a*16.3871;
               } 
     
-   float      ft3_m3 (){
+   f_64       ft3_m3 (f_64 a){
               return a*.0283168;
               }
               
-   float      yd3_m3 (){
+   f_64       yd3_m3 (f_64 a){
               return a*.7645548;
               }                                
 
                                         //oz to milliter
-   float      oz_mil(){
+   f_64       oz_mil(f_64 a){
               return a*29.5735;
               }
                                          //Gallon to liter
-   float      gal_l (){
+   f_64       gal_l (f_64 a){
               return a*3.78541;
               }
               
-   float      oz_g  (){
+   f_64       oz_g  (f_64 a){
               return a*28.3495231; 
               }                    
                                          // Avoirdupois pound (aka standard pound) to kg
-   float      lb_kg (){
+   f_64       lb_kg (f_64 a){
               return a*.4535924;
               }
                                           //US Short ton to metric ton              
-   float      tn_mt (){
+   f_64       tn_mt (f_64 a){
               return a*.907185;
               }
 /*
@@ -84,43 +85,43 @@ struct Convert_unit {
               
               
                                           //Fahrenheit to Kelvin 
-   float      f_klv(){
+   f_64       f_klv(f_64 a){
               return (a-32)*.55555+273.15;
               }
                                          //Foot-pound/sec to joule
-   float      fts_jl(){
+   f_64       fts_jl(f_64 a){
               return a*1.35518; 
               }
                                         //BTU to kilocalorie
-   float      btu_kc(){
+   f_64       btu_kc(f_64 a){
               return a*.252164;
               }
                                        //BTU to joules (ISO standard)
-   float      btu_jl(){
+   f_64       btu_jl(f_64 a){
               return a*1055.06;
               }
                                        //Curie to Becquerel
-   float      cu_bql (){
+   f_64       cu_bql (f_64 a){
               return a*3.7E+10;
               }   
                                       //Dyne to newton
-   float      dyn_nw(){
+   f_64       dyn_nw(f_64 a){
               return a*1E+5;
               }                   
                                       //erg to joule
-   float      erg_jl(){
+   f_64       erg_jl(f_64 a){
               return a*1E+7; 
               }           
                                      //horsepower to watt
-   float      hp_wt (){
+   f_64       hp_wt (f_64 a){
               return a*735.499;
               }  
                                     //Electron volts to joules
-  float       ev_jl (){
+  f_64        ev_jl (f_64 a){
               return a*1.60218E-19;
               }
                                    //Joules to electron volts 
-  float       jl_ev (){
+  f_64        jl_ev (f_64 a){
               return a*6.242E+18;
               }                          
 /*
@@ -128,27 +129,27 @@ struct Convert_unit {
 */                         
               
                                      //Astronomical unit to km
-   float      au_km (){
+   f_64       au_km (f_64 a){
               return a*149597870.7;
               }                
                                      //lightyear to km
-   float      ly_km (){
+   f_64       ly_km (f_64 a){
               return a*9460730472580.8;
               }
                                      //parsec to km
-   float      pc_km (){
+   f_64       pc_km (f_64 a){
               return a*30856775814913.673;
               }          
                                      //Solar radius to km
-   float      sor_km(){
+   f_64       sor_km(f_64 a){
               return a*695700;
               }
                                      //Solar mass to kilograms
-   float      som_kg(){
+   f_64       som_kg(f_64 a){
               return a*1.98847E+30; 
               }
                                      //Earth mass to kg
-   float      ert_kg (){
+   f_64       ert_kg (f_64 a){
               return a*5.974E+24;
               }           
               
@@ -156,127 +157,141 @@ struct Convert_unit {
             Planck unit conversions
 */               
                                     //SI to planck length (Gaussian)
-  float      si_plg (){
+  f_64       si_plg (f_64 a){
              return a*6.18792353E+34;
              }
                                    //SI to planck length (Lorentz-Heaviside)
-  float      si_pll (){
+  f_64       si_pll (f_64 a){
              return a*1.745505324E+34;
              }
                                   //SI to Planck temperature (Gaussian)
-  float      si_ptg (){
+  f_64       si_ptg (f_64 a){
              return a*7.058109415E+31;
              }           
                                   //SI to Planck temperature (Lorentz-Heaviside)
-  float      si_ptl (){
+  f_64       si_ptl (f_64 a){
              return a*2.502039162E+30;
              }                  
               
+              
+              
+/*
+            Atomic Units
+*/              
+
+
+  f_64      dalt_kg(f_64 a){
+            return a*1.66054E-27; 
+            }
+            
 /*
             Prefix conversion   where n_b and n is the prefix b= base unit
 */              
 
-  float      yota_b  (){
+  f_64       yota_base  (f_64 a){
              return a*1E+24; 
              } 
              
-  float      zeta_b  (){
+  f_64       zeta_base  (f_64 a){
              return a*1E+21;
              }
              
-  float      exa_b  (){
+  f_64       exa_base  (f_64 a){
              return a*1E+18;
              }
        
-  float      peta_b  (){
+  f_64       peta_base  (f_64 a){
              return a*1E+15;
              } 
              
-  float      tera_b (){
+  f_64       tera_base (f_64 a){
              return a*1E+12;
              }
  
-  float      giga_b (){
+  f_64       giga_base (f_64 a){
              return a*1E+9;
              }    
              
-  float      mega_b (){
+  f_64       mega_base (f_64 a){
              return a*1E+6;
              }                  
    
-   float     kilo_b  (){
+   f_64      kilo_base  (f_64 a){
              return a*1E+3;
              }  
    
-   float     mill_b (){
+   f_64      mill_base (f_64 a){
              return a*1E-3;
              }  
              
-   float     micr_b (){
+   f_64      micr_base (f_64 a){
              return a*1E-6;
              }  
              
-   float     nano_b (){
+   f_64      nano_base (f_64 a){
              return a*1E-9;
              }  
              
-   float     pico_b (){
+   f_64      pico_base (f_64 a){
              return a*1E-12;
              }  
              
-   float     femt_b (){
+   f_64      femt_base (f_64 a){
              return a*1E-15;
              }  
              
-   float     atto_b  (){
+   f_64      atto_base  (f_64 a){
              return a*1E-18;
              }  
              
-   float     zept_b (){
+   f_64      zept_base (f_64 a){
              return a*1E-21;
              }  
              
-   float     yoct_b (){
+   f_64      yoct_base (f_64 a){
              return a*1E-24;
              }                                                                                                                 
-};
 
-struct Convert_physics {
+/*
+            Physics conversions
+*/
 
-   float      a;
+
                                     //Frequency to wavelength
-   float      hz_wl(){
+   f_64       hz_wl(f_64 a){
               return a*3.33564095198152E-9; 
               } 
               
-   float      wl_hz(){             //Wavelength to frequency
+   f_64       wl_hz(f_64 a){             //Wavelength to frequency
               return a*299792458;
               }            
 
 
 
-};
+/*
 
-struct  Convert_math {
+Math conversions
 
-   float      a,b,x,y;
+*/
+
+   
                                    //Degrees to radians         
-   float      dg_rad(){
+   f_64       dg_rad(f_64 a ){
               return a*1.7453292E-2;
               }
                                   //Radians to degrees
-   float      rad_dg(){
+   f_64       rad_dg(f_64 a){
               return a* 57.2957795 ;
               }          
                                  //Input Radians only; a=angle b=distance; 
-   void       polar_cart(){
-              x= b*cos(a);
-              y= b*sin(a);
+   void       polar_cart(f_64 a,f_64 b){
+              f_64 x= b*cos(a);
+              f_64 y= b*sin(a);
               } 
                                 // a= x-coord, b= y-coord; x= distance, y= angle radians
-   void       cart_polar(){
-              x=sqrt(a*a+b*b);
-              y=tan(b/a);
+   void       cart_polar(f_64 a, f_64 b){
+              f_64 x=sqrt(a*a+b*b);
+              f_64 y=tan(b/a);
               }           
 
 
