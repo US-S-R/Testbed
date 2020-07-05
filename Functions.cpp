@@ -128,7 +128,7 @@ namespace CAS::Elementary{
 
 
                                         // Euclidean algorithm for GCD  (improve this!)
-   i_64  gcd(i_64 a, i_64 b){
+   i_64      gcd(i_64 a, i_64 b){
              while ((a %= b) && (b %= a));
              return (a + b);
              }
@@ -137,11 +137,11 @@ namespace CAS::Elementary{
              return gcd(a,b)==1 ? true:false;
              }            
                                        // Least common multiple
-   i_64  lcm(i_64 a, i_64 b){
-              return (a*b)/gcd(a,b);
+   i_64      lcm(i_64 a, i_64 b){
+             return (a*b)/gcd(a,b);
              }
                                       // Euler phi (totient) function, coprime counter (improve this!)
-   i_64  phi(i_64 a){
+   i_64      phi(i_64 a){
              i_64 b{0};
              for (i_64 i{1};i< a; i++)
              if (gcd(a,i) == 1){
@@ -150,7 +150,7 @@ namespace CAS::Elementary{
              return b;   
              }       
                                      // integer floor function 
-   i_64  floor(i_64 a, i_64 b){
+   i_64      floor(i_64 a, i_64 b){
              if (a >  b){
              a/=b;
              }
@@ -161,7 +161,7 @@ namespace CAS::Elementary{
 
 
   bool       is_int(double a){
-             return static_cast<long int>(a)> a ;
+             return static_cast<long int>(a)== a ;
              }
 
                                         //primality by trial division, slower than naive trial division unless compiled with -O3 
@@ -201,25 +201,25 @@ namespace CAS::Elementary{
           
                                      //algebraic dot product
                                      
- f_128      dot_prod_al(f_128 array_1[],f_128 array_2[], long int size){
-              f_128 dot_product{0};
-              for(int i{0}; i<=size;i++){
-              dot_product=dot_product + array_1[i]*array_2[i];
-              }
-              return dot_product;
-              }
+ f_128       dot_prod_al(f_128 array_1[],f_128 array_2[], long int size){
+             f_128 dot_product{0};
+             for(int i{0}; i<=size;i++){
+             dot_product=dot_product + array_1[i]*array_2[i];
+             }
+             return dot_product;
+             }
               
                                    //euclidean vector magnitude
               
   f_128      eu_vec_mag(f_128 vec_1[], long int size){
-               return sqrt(dot_prod_al( vec_1, vec_1,size));
-               }
+             return sqrt(dot_prod_al( vec_1, vec_1,size));
+             }
                
                                   ////geometric dot product
               
-  f_128     dot_prod_geo(f_128 vec_mag_1,f_128 vec_mag_2,f_128 angle){
-               return vec_mag_1*vec_mag_2*cos(angle);
-               }
+  f_128      dot_prod_geo(f_128 vec_mag_1,f_128 vec_mag_2,f_128 angle){
+             return vec_mag_1*vec_mag_2*cos(angle);
+             }
 
 
 
