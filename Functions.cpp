@@ -1,34 +1,51 @@
-#include<iostream>
-#include<cmath> //Cmath does not support long double for s_factorial
+#include<math.h> 
+#define f_64 double
 #define f_128 long double
 #define i_64 long int
-namespace CAS{
 
+#define pi 3.14159265358979323846264338327
+/*
+#define e 2.718281828459045235360287471352
+#define tau 6.28318530717958647692528676654
+*/
+#pragma once
+namespace CAS::Elementary{
+
+
+/*
+            Arithmetic functions
+*/
              
 
-                                        //Iterative addition 
-   f_128      iter_add(i_64 a){
-              f_128 x,result{0};
-              for (int i{1}; i <=a; i++){
-              std::cin>>x; 
-              result+=x;
-              }
-              return result; 
-              }
+                                        //Sigma notation
+  
               
-                                         //Iterative multiplication
-   f_128      iter_mx(i_64 a){
-              f_128 x, result{1};
-              for (int i{1}; i <=a; i++){
-              std::cin>>x; 
-              result=result*x;
+              template<typename data_type>
+   data_type  sum_series(data_type array[],i_64 length){
+              data_type sum{0};
+              for (long int i{0}; i <length; i++){
+              sum+=array[i];
               }
-              return result;
-              }           
+              return sum;
+              }  
+              
+              
+              
+                                           //PI notation
+              template<typename data_type>
+   data_type  product_series(data_type array[],i_64 length){
+              data_type product{1};
+              for (long int i{0}; i <length; i++){
+              product*=array[i];
+              }
+              return product;
+              }  
+              
+              
 
-                                                //optional exponentiation Function, highly inaccurate      
-    f_128     int_pow(f_128 a,int b){
-              i_64 j=1,c=0;
+                                                //optional exponentiation Function, highly inaccurate  for floating point slow in general    
+   inline f_128     int_pow(f_128 a,int b){
+              i_64 j{1},c{0};
               i_64 d=a;
               while(j < b){
               j*=2;
@@ -48,9 +65,9 @@ namespace CAS{
              
              
              template<typename data_type>
-                                          //sqrt algorithm, nearly as fast as math.h header
-   data_type nsqrt(data_type a){
-             data_type j=2;
+                                          //sqrt algorithm
+  data_type  nsqrt(data_type a){
+             data_type j{2};
              data_type c;
              while(j*j <= a){
              j*=2;
@@ -87,13 +104,21 @@ namespace CAS{
    f_128      g_mean(f_128 a, f_128 b){
               return pow(a,1/b);
               }
-                                          // Stirling Factorial, asymptotic to n! up to n=1754             
+                                          // Stirling Factorial, asymptotic to n! up to n=1754. Unable to use macros due to f_128 requirement           
    f_128      s_fact(i_64 a){
-              f_128 tau{6.283185307179586476925286766558},e{2.718281828459045235360287471352}, estimate; 
-              estimate= sqrt(tau*a)* pow((a/e),a)*(1+1/12*a);
-              return estimate;//*(1+(1/(a*a*e)));
+              f_128 tau{6.28318530717958647692528676654},e{2.718281828459045235360287471352};
+              return nsqrt(tau*a)* pow((a/e),a)*(1+1/12*a); //(1+(1/(a*a*e)));
               }
-    
+              
+              
+                                        //naive factorial 
+  f_128       naive_fact(i_64 a){
+              f_128 array[a];
+              for(long int i{0};i<a;i++){
+              array[i]=i+1;
+              }
+              return product_series<f_128>(array,a);
+              }  
              
 
 
@@ -102,23 +127,20 @@ namespace CAS{
  
 
 
-                                        // Euclidean algorithm for GCD
+                                        // Euclidean algorithm for GCD  (improve this!)
    i_64  gcd(i_64 a, i_64 b){
              while ((a %= b) && (b %= a));
              return (a + b);
              }
                                                 //Coprime test
-   bool      coprime(i_64 a, i_64 b){
-             if(gcd(a,b)==1){
-             return true;
-             }
-             return false;
+   bool      is_coprime(i_64 a, i_64 b){
+             return gcd(a,b)==1 ? true:false;
              }            
                                        // Least common multiple
    i_64  lcm(i_64 a, i_64 b){
               return (a*b)/gcd(a,b);
              }
-                                      // Euler phi (totient) function, coprime counter
+                                      // Euler phi (totient) function, coprime counter (improve this!)
    i_64  phi(i_64 a){
              i_64 b{0};
              for (i_64 i{1};i< a; i++)
@@ -138,30 +160,50 @@ namespace CAS{
    
 
 
+  bool       is_int(double a){
+             return static_cast<long int>(a)> a ;
+             }
 
-
-                                        //primality by abridged trial division
-   bool      primality(i_64 a){
-             if (a%2 == 0 || a%3 == 0){  
+                                        //primality by trial division, slower than naive trial division unless compiled with -O3 
+  bool       is_prime(i_64 a){
+             if(a!=2 && a%2 == 0){
              return false;
              }
-             else{                                      
-             for (i_64 i=5; i<= sqrt(a); i+=2) {
-             if (a%i==0){
+             else{ 
+             for (i_64 i{3}; i<= sqrt(a); i+=2) {
+             if (a%i ==0){
              return false;
-             }
              }
              }
              return true;
+             }
              } 
 
+
+
+
+
+  bool       is_strong(i_64 a){
+             i_64 next_prime=a+1, past_prime=a-1;
+             if(is_prime(a)==1){
+             while(is_prime(next_prime)!=1){
+             next_prime++;
+             }
+             while(is_prime(past_prime)!=1){
+             past_prime--;
+             }
+             }
+             return ((next_prime+past_prime)>>1) < a ? true: false;
+             }
+
+          
 
           
                                      //algebraic dot product
                                      
  f_128      dot_prod_al(f_128 array_1[],f_128 array_2[], long int size){
-              f_128 dot_product=0;
-              for(int i=0; i<=size;i++){
+              f_128 dot_product{0};
+              for(int i{0}; i<=size;i++){
               dot_product=dot_product + array_1[i]*array_2[i];
               }
               return dot_product;
@@ -178,6 +220,8 @@ namespace CAS{
   f_128     dot_prod_geo(f_128 vec_mag_1,f_128 vec_mag_2,f_128 angle){
                return vec_mag_1*vec_mag_2*cos(angle);
                }
+
+
 
 
 }
