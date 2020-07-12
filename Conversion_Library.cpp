@@ -1,7 +1,7 @@
 #include<cmath>
-#define f_32  float
-#define f_64  double
-#define f_128 long double
+#include"Function_Library_2"
+
+
 
  namespace CAS::Conversion {
 
@@ -106,11 +106,11 @@
               }   
                                       //Dyne to newton
    f_64       dyn_nw(f_64 a){
-              return a*1E+5;
+              return a*1E-5;
               }                   
                                       //erg to joule
    f_64       erg_jl(f_64 a){
-              return a*1E+7; 
+              return a*1E-7; 
               }           
                                      //horsepower to watt
    f_64       hp_wt (f_64 a){
@@ -277,11 +277,11 @@ Math conversions
    
                                    //Degrees to radians         
    f_64       dg_rad(f_64 a ){
-              return a*1.7453292E-2;
+              return fmod(a*1.7453292E-2,6.28319);
               }
                                   //Radians to degrees
    f_64       rad_dg(f_64 a){
-              return a* 57.2957795 ;
+              return fmod(a*57.2957795,360) ;
               }          
                                  //Input Radians only; a=angle b=distance; 
    void       polar_cart(f_64 a,f_64 b){
@@ -293,6 +293,7 @@ Math conversions
               f_64 x=sqrt(a*a+b*b);
               f_64 y=tan(b/a);
               }           
+
 
 
 };
