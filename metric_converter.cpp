@@ -59,19 +59,3 @@ f_64 metric_converter(f_64 value, std::string input){
       auto search=convert_table.find(input);
       return search->second;
 }
-
-
-
-int main(){
-
-int a;
-
-std::string test;
-//std::cout<<"Input value"<<std::endl;
-std::cin>>a;
-std::cout<<"Input unit"<<std::endl;
-std::cin>>test;
-std::cout<< metric_converter(a,test)<<std::endl;
-
-}
-
