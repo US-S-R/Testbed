@@ -1,0 +1,41 @@
+//polynomial
+
+
+namespace CAS::Datatype {
+
+struct Polynomial{
+
+
+
+
+
+
+
+
+
+
+
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+} //end namespace

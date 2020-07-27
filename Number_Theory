@@ -1,0 +1,116 @@
+#include "Function_Library"
+#pragma once
+
+ namespace CAS::Number_Theory {
+ 
+ 
+  bool       is_int(double a){
+             return static_cast<i_64>(a)== a ;
+             }
+ 
+ 
+  i_64       gcd(i_64 a, i_64 b){
+             while ((a %= b) && (b %= a));
+             return (a + b);
+             }
+                                                //Coprime test
+   bool      is_coprime(i_64 a, i_64 b){
+             return gcd(a,b)==1 ? true:false;
+             }            
+                                       // Least common multiple
+   i_64      lcm(i_64 a, i_64 b){
+             return (a*b)/gcd(a,b);
+             }
+                                      // Euler phi (totient) function, coprime counter (improve this!)
+   i_64      phi(i_64 a){
+             i_64 b{0};
+             for (i_64 i{1};i< a; i++)
+             if (gcd(a,i) == 1){
+             b+=1;
+             }
+             return b;   
+             }       
+                                     // integer floor function 
+   i_64      floor(i_64 a, i_64 b){
+             if (a >  b){
+             a/=b;
+             }
+             return a*b;
+             }
+             
+   
+
+
+
+                                        //primality by trial division
+  bool       is_prime(i_64 a){
+             if(a!=2 && a%2 == 0){
+             return false;
+             }
+             else{ 
+             for (i_64 i{3}; i<= sqrt(a); i+=2) {
+             if (a%i ==0){
+             return false;
+             }
+             }
+             return true;
+             }
+             } 
+
+
+
+
+
+  bool       is_strong(i_64 a){
+             i_64 next_prime=a+1, past_prime=a-1;
+             if(is_prime(a)==1){
+             while(is_prime(next_prime)!=1){
+             next_prime++;
+             }
+             while(is_prime(past_prime)!=1){
+             past_prime--;
+             }
+             }
+             return ((next_prime+past_prime)>>1) < a ? true: false;
+             }
+             
+  bool       is_square(f_128 a){
+             return CAS::Elementary::nsqrt<i_64>(a)*CAS::Elementary::nsqrt<i_64>(a)==a ;
+             }      
+                                          
+  i_64       nearest_sqre(i_64 a){
+             return std::round(CAS::Elementary::nsqrt<f_64>(a))* std::round(CAS::Elementary::nsqrt<f_64>(a));
+             }
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ }

@@ -1,0 +1,72 @@
+/*
+
+Geometric library;
+
+Objectives
+
+  Computation of surface area, perimeter, volume of n-dimensional polygons/spheres
+
+*/
+
+#include<iostream>
+#include<cmath>
+#include "Function_Library"
+#pragma once
+
+namespace CAS::Geometry{
+
+
+//Triangle
+    //Area
+
+     f_64 triangle_area(f_64 a, f_64 b, f_64 angle_c){
+          return .5*a*b*sin(angle_c);
+          }
+
+
+     f_64 triangle_heron(f_64 a, f_64 b, f_64 c){
+          f_64 s=(a+b+c)/2;
+          return sqrt(s*(s-a)*(s-b)*(s-c));
+          }
+
+
+
+
+
+//Spherical and Ellipsoid
+
+     f_64 spherical_volume(f_64 r){
+          return 4.1887902047863909846168*r*r*r;
+          }
+                 //Error bounds (2E-5,1E-14) {possibly higher, for Calley's series}; if eccentricity > .25 uses Calley,series else Gauss-Kummer
+                 //requires a to be the semimajor axis
+     f_64 ellipse_perimeter(f_64 a, f_64 b){
+          f_64 k=(b*b)/(a*a)*.5,  num=std::log(4/(b/a)),  h=((a-b)*(a-b))/((a+b)*(a+b))*.25;
+          return a/b >.25 ? pi*(a+b)*(1+h + h*h*.25 + h*h*h*.25 + h*h*h*h*.390625) : 4*a*(1+ k*(num-.5) + 0.75*k*k*num + 0.9375*k*k*k*num-2.406249975);
+          }
+
+
+
+    f_64 ellipse_area(f_64 a, f_64 b){
+         return a*b*pi;
+         }
+
+
+
+
+ // irregular polygon area  Gauss area formula aka shoelace
+ 
+ f_128 polygon_area(std::vector<i_64> xcoord, std::vector<i_64> ycoord, i_64 vector_size){
+       f_128 first_sum{0}, second_sum{0};
+       for(i_64 i{0}; i<vector_size; i++){
+       first_sum+=xcoord[i]*ycoord[i+1];
+       }
+       for(i_64 i{vector_size}; i>0; i--){
+       second_sum+=xcoord[i]*ycoord[i-1];
+       }
+       return std::abs((first_sum-second_sum))*.5;
+       }
+
+
+}
+

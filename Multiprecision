@@ -1,0 +1,34 @@
+//read string read array print string print array
+#include<iostream>
+#include<fstream>
+
+  namespace CAS::Multiprecision {
+  
+  
+  //struct Float{
+  
+  
+  
+  
+  //};
+  
+  
+  struct Integer{
+  
+  std::vector<i_64> number;
+  /*
+  void assign(, )               //if second argument is string read file in local directory and save as vector
+  
+  };
+  */
+  
+  void print(std::string vec_or_string={},std::string file={})                //print to either terminal or file as string or vector
+  
+  
+  
+  }
+  
+  
+  
+  
+  

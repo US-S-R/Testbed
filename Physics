@@ -1,0 +1,32 @@
+/*
+
+Physics
+*/ 
+#define g 6.674E-11
+#pragma once
+namespace CAS::Physics {
+
+
+
+  f_64   energy_mass(f_64 mass){
+         return mass*89875517873681764;
+         }
+                             //basic approximation of orbital velocity, sgp=G*M
+  f_64   first_cosmic(f_64 sgp, f_64 radius){
+         return sqrt(sgp/radius);
+         }
+                                //escape velocity approximation 
+  f_64   second_cosmic(f_64 sgp, f_64 radius){
+         return sqrt(2*sgp/radius);
+         }
+
+  f_64   vis_viva(f_64 sgp,f_64 radius,f_64 semi_major){
+         return sqrt(sgp*((2/radius) -(1/semi_major)));
+         }
+                                        //one body gravitational acceleration
+  f_64   g_acceleration(f_64 mass,f_64 radius ){
+         return (g*mass)/(radius*radius);
+         }       
+         
+         
+}

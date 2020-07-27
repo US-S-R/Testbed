@@ -1,0 +1,187 @@
+#include<math.h> 
+#define f_64 double
+#define f_128 long double
+#define i_64 long int
+
+#define pi 3.14159265358979323846264338327
+/*
+#define e 2.718281828459045235360287471352
+#define tau 6.28318530717958647692528676654
+*/
+#pragma once
+namespace CAS::Elementary{
+
+
+/*
+            Arithmetic functions
+*/
+             
+               template<typename data_type>
+   data_type   add(f_128 a, f_128 b){
+               return a+b;
+               }
+              
+              
+               template<typename data_type>
+   data_type   subtract(f_128 a, f_128 b){
+               return a-b;
+               }
+             
+                        
+               template<typename data_type>
+   data_type   division(f_128 a, f_128 b){
+               return a/b;
+               }   
+             
+             
+              template<typename data_type>
+   data_type  multiply(f_128 a, f_128 b){
+              return a*b;
+              }                           
+                                        //Sigma notation
+  
+              
+              template<typename data_type>
+   data_type  sigma_series(data_type array[],i_64 length){
+              data_type sum{0};
+              for (i_64 i{0}; i <length; i++){
+              sum+=array[i];
+              }
+              return sum;
+              }  
+              
+              
+              
+                                           //PI notation
+              template<typename data_type>
+   data_type  pi_series(data_type array[],i_64 length){
+              data_type product{1};
+              for (i_64 i{0}; i <length; i++){
+              product*=array[i];
+              }
+              return product;
+              }  
+              
+              
+
+                                                //optional exponentiation Function, highly inaccurate  for floating point slow in general    
+    f_128     int_pow(f_128 a,i_64 b){
+              i_64 j{1},c{0};
+              i_64 d=a;
+              while(j < b){
+              j*=2;
+              c++;
+              }
+              b-=(j/2);
+              for(int i{2}; i <= c; i++){
+              a*=a;
+              }
+              for(int i{0}; i < b; i++){
+              a=d*a;
+              }
+              return a;
+              }         
+             
+             
+             
+             
+             template<typename data_type>
+                                          //sqrt algorithm
+  data_type  nsqrt(data_type a){
+             data_type j{2};
+             data_type c;
+             while(j*j <= a){
+             j*=2;
+             }
+             c=j;
+             for (int i{0}; i<6;i++){
+             c= (c + a/c)/2;
+             }
+             return c;
+             }
+             
+
+             template<typename data_type>
+                                                 // nthroot algorithm
+  data_type  nthroot(data_type a, data_type b){
+             data_type c=nsqrt(nsqrt(a));
+             int i{0};
+             while(i<26){
+             c= ((b-1)*c + a/pow(c,b-1))/b;
+             i++;
+             }
+             return c;
+             }
+             
+                              // Stirling Factorial, asymptotic to n! up to n=1754. Unable to use macros due to f_128 requirement     
+                                                         
+   f_128      s_fact(i_64 a){                             
+              f_128 tau{6.28318530717958647692528676654},e{2.718281828459045235360287471352};
+              return nsqrt(tau*a)* pow((a/e),a)*(1+1/12*a); //(1+(1/(a*a*e)));
+              }
+              
+              
+                                        //naive factorial 
+  f_128       naive_fact(i_64 a){
+              f_128 array[a];
+              for(i_64 i{0};i<a;i++){
+              array[i]=i+1;
+              }
+              return pi_series<f_128>(array,a);
+              }  
+             
+             
+                                      //exp(1) accurate to 15 digits
+   f_64      exp(f_64 a){
+             f_64 sequence[20];
+             for (int i{0}; i<20;i++ ){
+             sequence[i]=pow(a,i)/naive_fact(i);
+             }
+             return sigma_series<f_64>(sequence,20);
+             }          
+             
+
+            
+    
+              template<typename data_type>														
+
+                                          //Arithmetic mean
+   data_type  a_mean(data_type a, i_64 b ){
+              return a/b;  
+              }       
+                                           // Geometric mean
+   f_128      g_mean(f_128 a, f_128 b){
+              return pow(a,1/b);
+              }
+                                                  
+             
+
+
+
+          
+                                     //algebraic dot product
+                                     
+ f_128       dot_prod_al(f_128 array_1[],f_128 array_2[], i_64 size){
+             f_128 dot_product{0};
+             for(int i{0}; i<=size;i++){
+             dot_product=dot_product + array_1[i]*array_2[i];
+             }
+             return dot_product;
+             }
+              
+                                   //euclidean vector magnitude
+              
+  f_128      eu_vec_mag(f_128 vec_1[], i_64 size){
+             return sqrt(dot_prod_al(vec_1,vec_1,size));
+             }
+               
+                                  ////geometric dot product
+              
+  f_128      dot_prod_geo(f_128 vec_mag_1,f_128 vec_mag_2,f_128 angle){
+             return vec_mag_1*vec_mag_2*cos(angle);
+             }
+
+
+
+
+}

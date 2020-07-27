@@ -1,0 +1,83 @@
+/*
+Rational Datatype
+
+objectives construct,reduce, print, add,subtract, multiply, divide, compare, match denominators
+
+*/
+
+//#include<iostream>
+#include "Number_Theory"
+
+#pragma GCC poison subtract
+                      // Standard Number theory notation where p is numerator and q is denominator
+                      
+ using namespace CAS::Number_Theory;                     
+ struct Rational {
+ 
+  i_64 p, q;
+  
+  
+ void assign(f_64 a, f_64 b ){         // assigns, converts and reduces the fraction
+      p=static_cast<i_64>(a)/gcd(a,b);
+      q=static_cast<i_64>(b)/gcd(a,b);
+      }
+                                       //produces reciprocal of it'self
+ void reciprocal(){
+      p^=q;
+      q^=p;
+      p^=q;
+      }
+      
+ void reduce(){
+      i_64 p2= p/gcd(p,q);  //temporary placeholders
+      i_64 q2= q/gcd(p,q);
+      p=p2;
+      q=q2;
+      }     
+      
+ void match(Rational &object_2){
+      p*=lcm(q, object_2.q)/q;
+      object_2.p*=lcm(q,object_2.q)/object_2.q;
+      q=object_2.q=lcm(q, object_2.q);
+      }   
+       
+ f_64 real(){
+      return static_cast<f_64>(p)/ static_cast<f_64>(q);
+      }     
+      
+ void multiply(Rational object_2){
+      p*=object_2.p;
+      q*=object_2.q;
+      reduce();
+      } 
+      
+ void divide(Rational object_2){
+      reciprocal();
+      multiply(object_2);
+      }   
+      /*      
+ void add(Rational object_2){
+      match(object_2);
+      p
+ 
+      }    
+      */                                    
+ void subtract(Rational object_2){ //fix this
+      match(object_2);
+      p*= lcm(q,object_2.q)/q;
+      p-=object_2.p;
+      reduce();
+      }     
+      
+      
+ void print(){
+ std::cout<<p<< "/" <<q<<std::endl;
+ }
+ 
+ 
+ 
+ 
+ 
+ };
+ 
+ 
