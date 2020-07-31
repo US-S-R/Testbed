@@ -1,42 +1,75 @@
+#include<cmath>
 
 
  namespace CAS::Datatype {
  
- 
+ template<class data_type>
  struct Complex {
  
+ data_type real,imag;
  
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- };
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
+ void assign(data_type a, data_type b){
+ real=a;
+ imag=b;
  }
+                        //complex conjugate
+ void conj(){
+ imag=1+~imag;
+ }
+                       //complex modulus aka magnitude in complex plane
+ double mod(){
+ return sqrt(real*real + imag*imag);
+ }
+ 
+ 
+ void add(Complex number2){
+ real+=number2.real;
+ imag+=number2.imag;
+ }
+ 
+ void subtract(Complex number2){
+ real-=number2.real;
+ imag-=number2.imag;
+ }
+ 
+ void multiply(Complex number2){
+ data_type placeholder= real*number2.real-imag*number2.imag;
+ data_type placeholder2=real*number2.imag +imag*number2.real;
+ real= placeholder;
+ imag=placeholder2;
+ }
+ /*
+ void division(Complex number2){
+ conj();
+ multiply(number2);
+ }
+ */
+ 
+ 
+ void print(){
+ std::cout<<real<<" + "<<imag<<" im";
+ }
+ 
+ 
+ 
+ 
+ };  //end struct
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ }//end namespace
