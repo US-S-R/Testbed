@@ -1,14 +1,6 @@
-/*
-Rational Datatype
-
-objectives construct,reduce, print, add,subtract, multiply, divide, compare, match denominators
-
-*/
-
-//#include<iostream>
+#include<iostream>
 #include "Number_Theory"
 
-#pragma GCC poison subtract
                       // Standard Number theory notation where p is numerator and q is denominator
                       
  using namespace CAS::Number_Theory;                     
@@ -55,14 +47,15 @@ objectives construct,reduce, print, add,subtract, multiply, divide, compare, mat
       reciprocal();
       multiply(object_2);
       }   
-      /*      
- void add(Rational object_2){
+            
+ void add(Rational& object_2){
       match(object_2);
-      p
- 
+      p*=lcm(q,object_2.q)/q;
+      p+=object_2.p;
+      reduce();
       }    
-      */                                    
- void subtract(Rational object_2){ //fix this
+                                         
+ void subtract( Rational& object_2){ 
       match(object_2);
       p*= lcm(q,object_2.q)/q;
       p-=object_2.p;
@@ -71,13 +64,8 @@ objectives construct,reduce, print, add,subtract, multiply, divide, compare, mat
       
       
  void print(){
- std::cout<<p<< "/" <<q<<std::endl;
+  std::cout<<p<<"/"<<q<<std::endl;
  }
  
  
- 
- 
- 
  };
- 
- 
