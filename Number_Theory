@@ -1,4 +1,6 @@
 #include "Function_Library"
+#include<thread>
+#include<future>
 #pragma once
 
  namespace CAS::Number_Theory {
@@ -13,6 +15,10 @@
              while ((a %= b) && (b %= a));
              return (a + b);
              }
+     /*        
+  i_64       gcd_vec(i_64 array[], i_64 length){
+  
+             } */          
                                                 //Coprime test
    bool      is_coprime(i_64 a, i_64 b){
              return gcd(a,b)==1 ;//? true:false;
@@ -48,7 +54,8 @@
              return false;
              }
              else{ 
-             for (i_64 i{3}; i<= sqrt(a); i+=2) {
+             //constexpr i_64 sqrt_a = sqrt(a)
+             for (i_64 i{3}; i*i<=a; i+=2) {
              if (a%i ==0){
              return false;
              }
@@ -67,6 +74,22 @@
             }
             return prime_count;
             }
+            
+       void func(std::promise<i_64> && p, i_64 x, i_64 y) {
+                  p.set_value(CAS::Number_Theory::pi_func(x,y));
+            }
+
+    i_64     parallel_pi(i_64 x, i_64 y){
+             std::promise<i_64> a,b;
+             std::future<i_64> c= a.get_future();
+             std::future<i_64> d=b.get_future();
+  
+             std::thread e(&func, std::move(a),((x-y)/3)*2+y,y); //initalizing thread 1 (1 to x/2)
+             std::thread f(&func, std::move(b),x,((x-y)/3)*2+y); //initializing thread 2 (x/2 to 2/3 x)
+             e.join();
+             f.join();
+             return c.get() + d.get();
+         }          
 
 
 
@@ -83,15 +106,50 @@
              return ((next_prime+past_prime)>>1) < a ? true: false;
              }
              
+             
+  bool       is_sophie(i_64 a){
+             return is_prime(a)&is_prime(a*2 +1);   //Pocklington test gcd(2^((safe_prime -1)/sophie)-1,safe_prime)
+             }           
+             
   bool       is_square(f_128 a){
              return CAS::Elementary::nsqrt<i_64>(a)*CAS::Elementary::nsqrt<i_64>(a)==a ;
-             }      
-                                          
+             }    
+       /*      
+  bool       squarefree(f_128 a){
+  
+             }             
+          */                                
   i_64       nearest_sqre(i_64 a){
              return std::round(CAS::Elementary::nsqrt<f_64>(a))* std::round(CAS::Elementary::nsqrt<f_64>(a));
              }
-
  
  
-
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
  }
